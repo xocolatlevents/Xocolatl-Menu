@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú de Alimentos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .container {
+            max-width: 900px;
+            padding: 1.5rem;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .modal {
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none;
+        }
+        .modal.open {
+            display: flex;
+        }
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid white;
+            width: 24px;
+            height: 24px;
+            -webkit-animation: spin 1s linear infinite;
+            animation: spin 1s linear infinite;
+        }
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center py-10">
+
+    <div class="container mx-auto">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl sm:text-5xl font-bold text-gray-800">Menú de Alimentos Xocolatl</h1>
+            <p class="mt-2 text-lg text-gray-600">Opciones para un almuerzo delicioso.</p>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Baguettes Section -->
+            <section class="col-span-1 md:col-span-2 lg:col-span-3">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 border-b-2 border-gray-300 pb-2">Baguettes</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <!-- Baguette de Milanesa de Pollo -->
+                    <div class="card bg-white rounded-lg p-6 flex flex-col items-center text-center" onclick="showModal('Baguette de Milanesa de Pollo', 155.00)">
+                        <img src="https://images.unsplash.com/photo-1542988167-e95963f4a9b5?q=80&w=2070&auto=format&fit=crop" alt="Baguette de Pollo" class="w-36 h-36 rounded-full mb-4 object-cover">
+                        <h3 class="text-xl font-semibold text-gray-800">Baguette de Milanesa de Pollo</h3>
+                        <p class="text-gray-600 mt-2">Precio: $155.00</p>
+                    </div>
+                    <!-- Baguette de Jamón de Pavo -->
+                    <div class="card bg-white rounded-lg p-6 flex flex-col items-center text-center" onclick="showModal('Baguette de Jamón de Pavo', 140.00)">
+                        <img src="https://images.unsplash.com/photo-1518063056158-b1a37c385c94?q=80&w=2070&auto=format&fit=crop" alt="Baguette de Pavo" class="w-36 h-36 rounded-full mb-4 object-cover">
+                        <h3 class="text-xl font-semibold text-gray-800">Baguette de Jamón de Pavo</h3>
+                        <p class="text-gray-600 mt-2">Precio: $140.00</p>
+                    </div>
+                    <!-- Baguette de Roastbeef -->
+                    <div class="card bg-white rounded-lg p-6 flex flex-col items-center text-center" onclick="showModal('Baguette de Roastbeef', 195.00)">
+                        <img src="https://images.unsplash.com/photo-1528659556209-6798a287ce91?q=80&w=2070&auto=format&fit=crop" alt="Baguette de Roastbeef" class="w-36 h-36 rounded-full mb-4 object-cover">
+                        <h3 class="text-xl font-semibold text-gray-800">Baguette de Roastbeef</h3>
+                        <p class="text-gray-600 mt-2">Precio: $195.00</p>
+                    </div>
+                    <!-- Baguette de Arrachera -->
+                    <div class="card bg-white rounded-lg p-6 flex flex-col items-center text-center" onclick="showModal('Baguette de Arrachera', 210.00)">
+                        <img src="https://images.unsplash.com/photo-1522244243171-417161b97072?q=80&w=2070&auto=format&fit=crop" alt="Baguette de Arrachera" class="w-36 h-36 rounded-full mb-4 object-cover">
+                        <h3 class="text-xl font-semibold text-gray-800">Baguette de Arrachera</h3>
+                        <p class="text-gray-600 mt-2">Precio: $210.00</p>
+                    </div>
+                    <!-- Baguette de Carnes Frías -->
+                    <div class="card bg-white rounded-lg p-6 flex flex-col items-center text-center" onclick="showModal('Baguette de Carnes Frías', 180.00)">
+                        <img src="https://images.unsplash.com/photo-1549449301-494d4586d1b2?q=80&w=2070&auto=format&fit=crop" alt="Baguette de Carnes Frías" class="w-36 h-36 rounded-full mb-4 object-cover">
+                        <h3 class="text-xl font-semibold text-gray-800">Baguette de Carnes Frías</h3>
+                        <p class="text-gray-600 mt-2">Precio: $180.00</p>
+                    </div>
+                    <!-- Baguette de Jamón Serrano -->
+                    <div class="card bg-white rounded-lg p-6 flex flex-col items-center text-center" onclick="showModal('Baguette de Jamón Serrano', 165.00)">
+                        <img src="https://images.unsplash.com/photo-1517436034176-6515867a505b?q=80&w=2070&auto=format&fit=crop" alt="Baguette de Jamón Serrano" class="w-36 h-36 rounded-full mb-4 object-cover">
+                        <h3 class="text-xl font-semibold text-gray-800">Baguette de Jamón Serrano</h3>
+                        <p class="text-gray-600 mt-2">Precio: $165.00</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Entradas y Ensaladas Section -->
+            <section class="col-span-1 md:col-span-2 lg:col-span-3 mt-10">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 border-b-2 border-gray-300 pb-2">Entradas y Ensaladas</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <!-- Ensalada César con Pollo -->
+                    <div class="card bg-white rounded-lg p-6 flex flex-col items-center text-center" onclick="showModal('Ensalada César con Pollo', 140.00)">
+                        <img src="https://images.unsplash.com/photo-1607532657758-c0b77c57d1b3?q=80&w=2070&auto=format&fit=crop" alt="Ensalada César" class="w-36 h-36 rounded-full mb-4 object-cover">
+                        <h3 class="text-xl font-semibold text-gray-800">Ensalada César con Pollo</h3>
+                        <p class="text-gray-600 mt-2">Precio: $140.00</p>
+                    </div>
+                    <!-- Ensalada de Salmón -->
+                    <div class="card bg-white rounded-lg p-6 flex flex-col items-center text-center" onclick="showModal('Ensalada de Salmón', 210.00)">
+                        <img src="https://images.unsplash.com/photo-1621343751717-d2b38f88e6a5?q=80&w=2070&auto=format&fit=crop" alt="Ensalada de Salmón" class="w-36 h-36 rounded-full mb-4 object-cover">
+                        <h3 class="text-xl font-semibold text-gray-800">Ensalada de Salmón</h3>
+                        <p class="text-gray-600 mt-2">Precio: $210.00</p>
+                    </div>
+                    <!-- Ensalada de Atún -->
+                    <div class="card bg-white rounded-lg p-6 flex flex-col items-center text-center" onclick="showModal('Ensalada de Atún Enlatado', 160.00)">
+                        <img src="https://images.unsplash.com/photo-1522069169601-38e55e821104?q=80&w=2070&auto=format&fit=crop" alt="Ensalada de Atún" class="w-36 h-36 rounded-full mb-4 object-cover">
+                        <h3 class="text-xl font-semibold text-gray-800">Ensalada de Atún Enlatado</h3>
+                        <p class="text-gray-600 mt-2">Precio: $160.00</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Plato Fuerte Section -->
+            <section class="col-span-1 md:col-span-2 lg:col-span-3 mt-10">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 border-b-2 border-gray-300 pb-2">Platos Fuertes</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <!-- Milanesa de Pollo con Arroz -->
+                    <div class="card bg-white rounded-lg p-6 flex flex-col items-center text-center" onclick="showModal('Milanesa de Pollo con Arroz', 190.00)">
+                        <img src="https://images.unsplash.com/photo-1582239454807-7815b399d8b1?q=80&w=2070&auto=format&fit=crop" alt="Milanesa de Pollo" class="w-36 h-36 rounded-full mb-4 object-cover">
+                        <h3 class="text-xl font-semibold text-gray-800">Milanesa de Pollo con Arroz</h3>
+                        <p class="text-gray-600 mt-2">Precio: $190.00</p>
+                    </div>
+                    <!-- Cochinita Pibil -->
+                    <div class="card bg-white rounded-lg p-6 flex flex-col items-center text-center" onclick="showModal('Cochinita Pibil', 185.00)">
+                        <img src="https://images.unsplash.com/photo-1549293457-37b018503b41?q=80&w=2070&auto=format&fit=crop" alt="Cochinita Pibil" class="w-36 h-36 rounded-full mb-4 object-cover">
+                        <h3 class="text-xl font-semibold text-gray-800">Cochinita Pibil</h3>
+                        <p class="text-gray-600 mt-2">Precio: $185.00</p>
+                    </div>
+                    <!-- Lasagna a la Boloñesa -->
+                    <div class="card bg-white rounded-lg p-6 flex flex-col items-center text-center" onclick="showModal('Lasaña a la Boloñesa', 210.00)">
+                        <img src="https://images.unsplash.com/photo-1622383563914-9989808a38a8?q=80&w=2070&auto=format&fit=crop" alt="Lasaña a la Boloñesa" class="w-36 h-36 rounded-full mb-4 object-cover">
+                        <h3 class="text-xl font-semibold text-gray-800">Lasaña a la Boloñesa</h3>
+                        <p class="text-gray-600 mt-2">Precio: $210.00</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modal --> <script>
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalPrice = document.getElementById('modalPrice');
+        const geminiOutput = document.getElementById('geminiOutput');
+        const descriptionBtn = document.getElementById('descriptionBtn');
+        const funFactBtn = document.getElementById('funFactBtn');
+        const descriptionText = document.getElementById('descriptionText');
+        const descriptionSpinner = document.getElementById('descriptionSpinner');
+        const funFactText = document.getElementById('funFactText');
+        const funFactSpinner = document.getElementById('funFactSpinner');
+
+        let currentItem = '';
+
+        function showModal(title, price) {
+            currentItem = title;
+            modalTitle.textContent = title;
+            modalPrice.textContent = `Precio: $${price.toFixed(2)}`;
+            geminiOutput.textContent = '';
+            modal.classList.add('open');
+        }
+
+        function closeModal() {
+            modal.classList.remove('open');
+        }
+
+        descriptionBtn.addEventListener('click', () => getGeminiResponse('description', currentItem));
+        funFactBtn.addEventListener('click', () => getGeminiResponse('fun_fact', currentItem));
+
+        async function getGeminiResponse(type, item) {
+            let buttonText, buttonSpinner;
+            let prompt;
+            let systemPrompt;
+
+            if (type === 'description') {
+                buttonText = descriptionText;
+                buttonSpinner = descriptionSpinner;
+                systemPrompt = 'Actúa como un chef experto y describe este platillo de manera apetitosa y atractiva, en no más de 30 palabras.';
+                prompt = `Dame una descripción creativa y deliciosa para el platillo llamado "${item}".`;
+            } else {
+                buttonText = funFactText;
+                buttonSpinner = funFactSpinner;
+                systemPrompt = 'Actúa como un experto en historia y cultura culinaria. Proporciona un dato curioso sobre este platillo en no más de 30 palabras.';
+                prompt = `Dame un dato curioso o histórico sobre el platillo llamado "${item}".`;
+            }
+
+            buttonText.classList.add('hidden');
+            buttonSpinner.classList.remove('hidden');
+            geminiOutput.textContent = 'Generando...';
+
+            const apiKey = ""
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+                tools: [{ "google_search": {} }],
+            };
+            
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error en la API: ${response.status}`);
+                }
+
+                const result = await response.json();
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                if (text) {
+                    geminiOutput.textContent = text;
+                } else {
+                    geminiOutput.textContent = 'No se pudo generar el texto. Intenta de nuevo.';
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                geminiOutput.textContent = 'Hubo un error al conectar con el servidor. Intenta de nuevo.';
+            } finally {
+                buttonText.classList.remove('hidden');
+                buttonSpinner.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
+
